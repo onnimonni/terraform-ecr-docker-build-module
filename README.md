@@ -3,7 +3,7 @@
 This is a quite hacky module which contains few bash scripts which build docker images locally and pushes them into AWS ECR using aws cli.
 
 ## Requirements
-You need to have following programs installed and in your $PATH:
+You need to have following programs installed in your $PATH:
 
 * bash
 * md5sum or md5
@@ -24,7 +24,7 @@ resource "aws_ecr_repository" "test_service" {
 
 # Build Docker image and push to ECR from folder: ./example-service-directory
 module "ecr_docker_build" {
-  source = "./ecr_docker_build_and_push"
+  source = "github.com/onnimonni/terraform-ecr-docker-build-module"
 
   # Absolute path into the service which needs to be build
   dockerfile_folder = "${path.module}/example-service-directory"
@@ -44,4 +44,4 @@ module "ecr_docker_build" {
 MIT
 
 ## Author
-Onni Hakala
+[Onni Hakala](https://github.com/onnimonni)
