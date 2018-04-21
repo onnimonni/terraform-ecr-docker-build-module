@@ -10,9 +10,9 @@ aws_region=$3
 
 # Allow overriding the aws region from system
 if [ "$aws_region" != "" ]; then
-  $aws_flags = "--region $aws_region"
+  aws_flags = "--region $aws_region"
 else
-  $aws_flags = ""
+  aws_flags = ""
 fi
 
 # Check that aws is installed
