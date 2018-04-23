@@ -10,17 +10,16 @@ aws_region=$3
 
 # Allow overriding the aws region from system
 if [ "$aws_region" != "" ]; then
-  aws_flags="--region $aws_region"
+  aws_extra_flags="--region $aws_region"
 else
-  aws_flags=""
+  aws_extra_flags=""
 fi
 
 # Check that aws is installed
 which aws > /dev/null || { echo 'ERROR: aws-cli is not installed' ; exit 1; }
 
 # Connect into aws
-# Remove '-e none' flag from the output if exists
-$(aws ecr get-login $aws_flags | sed 's| -e none | |g') || { echo 'ERROR: aws ecr login failed' ; exit 1; }
+$(aws ecr get-login --no-include-email $aws_extra_flags) || { echo 'ERROR: aws ecr login failed' ; exit 1; }
 
 # Check that docker is installed and running
 which docker > /dev/null && docker ps > /dev/null || { echo 'ERROR: docker is not running' ; exit 1; }
