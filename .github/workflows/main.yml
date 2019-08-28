@@ -1,0 +1,17 @@
+name: CI
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v1
+    - name: Output terraform version
+      run: terraform --version
+    - name: Install Terraform dependencies
+      run: terraform init
+    - name: Check Terraform syntax
+      run: terraform validate
