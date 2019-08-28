@@ -3,6 +3,9 @@
 This is a quite hacky module which contains few bash scripts which build docker images locally and pushes them into AWS ECR using aws cli.
 
 ## Requirements
+
+Terraform version needs to be 0.12 or newer.
+
 You need to have following programs installed in your $PATH:
 
 * bash
