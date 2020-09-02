@@ -12,6 +12,7 @@ You need to have following programs installed in your $PATH:
 * md5sum or md5
 * aws
 * docker
+* tar
 
 **Note:** Docker server needs to be running so that we can actually build images
 
