@@ -20,3 +20,6 @@ variable "ecr_repository_url" {
   description = "Full url for the ecr repository"
 }
 
+variable "use_md5_as_tag" {
+  default     = false
+}
