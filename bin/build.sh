@@ -6,6 +6,7 @@ set -e
 # This is the order of arguments
 build_folder=$1
 aws_ecr_repository_url_with_tag=$2
+# kept for backwards compatibility
 aws_region=$3
 
 # Allow overriding the aws region from system
