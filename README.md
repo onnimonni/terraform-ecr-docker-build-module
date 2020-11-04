@@ -38,6 +38,9 @@ module "ecr_docker_build" {
   # The region which we will log into with aws-cli
   aws_region = "eu-west-1"
 
+  # The aws profile used in aws-cli (Defaults to 'default')
+  aws_profile = "default"
+
   # ECR repository where we can push
   ecr_repository_url = "${aws_ecr_repository.test_service.repository_url}"
 }
