@@ -1,3 +1,6 @@
+
+variable "ecs_cluster_name"{}
+variable "ecs_service_name"{}
 variable "dockerfile_folder" {
   type        = string
   description = "This is the folder which contains the Dockerfile"
@@ -19,4 +22,5 @@ variable "ecr_repository_url" {
   type        = string
   description = "Full url for the ecr repository"
 }
+
 
