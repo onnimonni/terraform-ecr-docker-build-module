@@ -7,9 +7,10 @@ set -e
 build_folder=$1
 aws_ecr_repository_url_with_tag=$2
 # kept for backwards compatibility
-aws_region=$3
-ecs_cluster_name=$4
-ecs_service_name=$5
+
+ecs_cluster_name=$3
+ecs_service_name=$4
+aws_region=$5
 
 # Allow overriding the aws region from system
 if [ "$aws_region" != "" ]; then
