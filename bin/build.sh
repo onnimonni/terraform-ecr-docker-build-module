@@ -10,7 +10,8 @@ aws_ecr_repository_url_with_tag=$2
 
 ecs_cluster_name=$3
 ecs_service_name=$4
-aws_region=$5
+additional_docker_tag=$5
+aws_region=$6
 
 # Allow overriding the aws region from system
 if [ "$aws_region" != "" ]; then
@@ -30,10 +31,10 @@ aws ecr get-login-password $aws_extra_flags | docker login --username AWS --pass
 echo "Building $aws_ecr_repository_url_with_tag from $build_folder/Dockerfile"
 
 # Build image
-docker build -t $aws_ecr_repository_url_with_tag $build_folder
+docker build -t $aws_ecr_repository_url_with_tag $build_folder -t $additional_docker_tag
 
 # Push image
-docker push $aws_ecr_repository_url_with_tag
+docker push $aws_ecr_repository_url_with_tag --all-tags
 
 # Update the ecs service
 aws ecs update-service --cluster $ecs_cluster_name  --service $ecs_service_name --force-new-deployment
