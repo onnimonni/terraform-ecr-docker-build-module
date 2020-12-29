@@ -38,7 +38,7 @@ else
   docker build -t $aws_ecr_repository_url:$tag $build_folder
 fi
 # Push image
-docker push $aws_ecr_repository_url -a
+docker push -a $aws_ecr_repository_url
 
 # Update the ecs service
 aws ecs update-service --cluster $ecs_cluster_name  --service $ecs_service_name --force-new-deployment
