@@ -12,6 +12,12 @@ variable "docker_image_tag" {
   default     = "latest"
 }
 
+variable "additional_docker_tag"{
+  type        = string
+  description = "This is an additional tag for images"
+  default     = ""
+}
+
 variable "aws_region" {
   type        = string
   description = "AWS region for ECR"
