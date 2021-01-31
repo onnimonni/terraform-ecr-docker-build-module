@@ -37,6 +37,6 @@ variable "additional_docker_flags"{
 }
 variable "destroy_task" {
   type        = string
-  description = "leave empty to deploy new task by deleting the old one or write no_downtime to use the aws inherit method this is an option because in staging the aws method cannot be used"
+  description = "leave empty to use the aws method or write destroy task to delete the old task definition"
   default     = ""
 }
