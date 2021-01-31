@@ -30,3 +30,8 @@ variable "ecr_repository_url" {
 }
 
 
+variable "additional_docker_flags"{
+  type        = string
+  description = "This is an additional flags for the docker build"
+  default     = ""
+}

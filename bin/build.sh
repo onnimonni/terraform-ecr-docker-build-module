@@ -13,6 +13,7 @@ ecs_cluster_name=$4
 ecs_service_name=$5
 additional_docker_tag=$6
 aws_region=$7
+additional_docker_flags=$8
 
 # Allow overriding the aws region from system
 if [ "$aws_region" != "" ]; then
@@ -33,9 +34,9 @@ echo "Building $aws_ecr_repository_url:$tag from $build_folder/Dockerfile"
 
 # Build image
 if [ "$additional_docker_tag" != "" ]; then
-  docker build -t $aws_ecr_repository_url:$tag -t $aws_ecr_repository_url:$additional_docker_tag $build_folder
+  docker build -t $aws_ecr_repository_url:$tag -t $aws_ecr_repository_url:$additional_docker_tag $build_folder $additional_docker_flags
 else
-  docker build -t $aws_ecr_repository_url:$tag $build_folder
+  docker build -t $aws_ecr_repository_url:$tag $build_folder $additional_docker_flags
 fi
 # Push image
 version=`echo "$(printf $(docker version --format {{.Server.Version}})'\n20.10.0'| sort -V)" | head -1`
