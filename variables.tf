@@ -35,3 +35,8 @@ variable "additional_docker_flags"{
   description = "This is an additional flags for the docker build"
   default     = ""
 }
+variable "destroy_task" {
+  type        = string
+  description = "leave empty to deploy new task by deleting the old one or write no_downtime to use the aws inherit method this is an option because in staging the aws method cannot be used"
+  default     = ""
+}

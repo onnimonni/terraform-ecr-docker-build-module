@@ -2,7 +2,10 @@
 
 # Fail fast
 set -e
-
+function get_task_arns_to_remove {
+  local OLD_TASK_IDS=$(aws ecs list-tasks --cluster my-cluster --service-name api-service --desired-status RUNNING | grep -E "task/" | sed -E "s/.*task\/(.*)\"/\1/")
+  array=($(echo "$OLD_TASK_IDS" | tr ',\n' '\n'))
+}
 # This is the order of arguments
 build_folder=$1
 aws_ecr_repository_url=$2
@@ -14,6 +17,9 @@ ecs_service_name=$5
 additional_docker_tag=$6
 aws_region=$7
 additional_docker_flags=$8
+destroy_task=$9
+
+
 
 # Allow overriding the aws region from system
 if [ "$aws_region" != "" ]; then
@@ -48,4 +54,12 @@ else
 fi
 
 # Update the ecs service
-aws ecs update-service --cluster $ecs_cluster_name  --service $ecs_service_name --force-new-deployment
+if [ "$destroy_task" == "" ]; then
+  get_task_arns_to_remove
+  for element in "${array[@]}"
+  do
+      aws ecs stop-task --cluster $ecs_cluster_name --task ${element}
+  done
+else
+  aws ecs update-service --cluster $ecs_cluster_name  --service $ecs_service_name --force-new-deployment
+fi
