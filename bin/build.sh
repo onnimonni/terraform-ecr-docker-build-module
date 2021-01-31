@@ -54,7 +54,7 @@ else
 fi
 
 # Update the ecs service
-if [ "$destroy_task" == "" ]; then
+if [ "$destroy_task" != "" ]; then
   get_task_arns_to_remove
   for element in "${array[@]}"
   do
