@@ -4,10 +4,9 @@
 set -e
 
 function get_task_arns_to_remove {
-  local OLD_TASK_IDS=$(aws ecs list-tasks --cluster $ecs_cluster_name \
-   --service-name $ecs_service_name --region $aws_region --desired-status RUNNING \  # this command returns a json list so we need to break it down
-  | grep -E "task/" \  # looking for the line with the word task
-  | sed -E "s/.*task\/(.*)\"/\1/")  # looking for all chars after "task"
+  local OLD_TASK_IDS=$(aws ecs list-tasks --cluster $ecs_cluster_name --service-name $ecs_service_name --region $aws_region --desired-status RUNNING |  #  this is to get tasks arns
+    grep -E "task/" |  #  to search the line with task
+    sed -E "s/.*task\/(.*)\"/\1/")  # to find everything after task/
   array=($(echo "$OLD_TASK_IDS" | tr ',\n' '\n'))  # making an arr by /n,
 }
 # This is the order of arguments
