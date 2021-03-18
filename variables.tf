@@ -20,3 +20,8 @@ variable "ecr_repository_url" {
   description = "Full url for the ecr repository"
 }
 
+variable "dockerfile_name" {
+  type        = string
+  description = "Dockerfile name, default to Dockerfile"
+  default     = "Dockerfile"
+}
