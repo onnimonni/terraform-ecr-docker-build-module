@@ -8,6 +8,9 @@ build_folder=$1
 aws_ecr_repository_url_with_tag=$2
 # kept for backwards compatibility
 aws_region=$3
+dockerfile_name=$4
+
+main_folder="$(pwd)"
 
 # Allow overriding the aws region from system
 if [ "$aws_region" != "" ]; then
@@ -23,13 +26,17 @@ which aws > /dev/null || { echo 'ERROR: aws-cli is not installed' ; exit 1; }
 which docker > /dev/null && docker ps > /dev/null || { echo 'ERROR: docker is not running' ; exit 1; }
 
 # Connect into aws
-aws ecr get-login-password $aws_extra_flags | docker login --username AWS --password-stdin $aws_ecr_repository_url_with_tag
+(aws ecr get-login-password $aws_extra_flags | docker login --username AWS --password-stdin $aws_ecr_repository_url_with_tag) || echo 'Credentials already in keychan'
 
 # Some Useful Debug
-echo "Building $aws_ecr_repository_url_with_tag from $build_folder/Dockerfile"
+echo "Building $aws_ecr_repository_url_with_tag from $build_folder/$dockerfile_name"
+
+cd $build_folder
 
 # Build image
-docker build -t $aws_ecr_repository_url_with_tag $build_folder
+docker build -t $aws_ecr_repository_url_with_tag . --file "$dockerfile_name"
+
+cd $main_folder
 
 # Push image
 docker push $aws_ecr_repository_url_with_tag
