@@ -30,7 +30,7 @@ which docker > /dev/null && docker ps > /dev/null || { echo 'ERROR: docker is no
 echo "Building $aws_ecr_repository_url_with_tag from $build_folder/$dockerfile_name"
 
 # Build image
-docker build -t $aws_ecr_repository_url_with_tag $build_folder --file $build_folder$dockerfile_name
+docker build -t $aws_ecr_repository_url_with_tag $build_folder --file "$build_folder/$dockerfile_name"
 
 # Push image
 docker push $aws_ecr_repository_url_with_tag
