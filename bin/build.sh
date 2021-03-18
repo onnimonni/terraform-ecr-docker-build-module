@@ -24,7 +24,7 @@ which aws > /dev/null || { echo 'ERROR: aws-cli is not installed' ; exit 1; }
 which docker > /dev/null && docker ps > /dev/null || { echo 'ERROR: docker is not running' ; exit 1; }
 
 # Connect into aws
-aws ecr get-login-password $aws_extra_flags | docker login --username AWS --password-stdin $aws_ecr_repository_url_with_tag
+(aws ecr get-login-password $aws_extra_flags | docker login --username AWS --password-stdin $aws_ecr_repository_url_with_tag) || echo 'Credentials already in keychan'
 
 # Some Useful Debug
 echo "Building $aws_ecr_repository_url_with_tag from $build_folder/$dockerfile_name"
