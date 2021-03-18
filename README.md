@@ -32,6 +32,9 @@ module "ecr_docker_build" {
   # Absolute path into the service which needs to be build
   dockerfile_folder = "${path.module}/example-service-directory"
 
+  # The Dockerfile file name (Defaults to 'Dockerfile')
+  dockerfile_name = "Dockerfile"
+
   # Tag for the builded Docker image (Defaults to 'latest')
   docker_image_tag = "development"
   
