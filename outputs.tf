@@ -3,3 +3,6 @@ output "ecr_image_url" {
   description = "Full URL to image in ecr with tag"
 }
 
+output "build_id" {
+  value = null_resource.build_and_push.id
+}
