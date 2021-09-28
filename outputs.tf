@@ -6,3 +6,7 @@ output "ecr_image_url" {
 output "build_id" {
   value = null_resource.build_and_push.id
 }
+
+output "docker_md5" {
+  value = data.external.build_folder.result.md5
+}
